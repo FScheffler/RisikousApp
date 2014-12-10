@@ -1,9 +1,10 @@
-package de.risikous.app;
+package de.risikous.view;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import de.risikous.app.R;
 
 
 public class Main extends ActionBarActivity {
