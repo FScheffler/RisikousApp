@@ -35,5 +35,4 @@
             android:layout_below="@+id/weiter" android:layout_centerHorizontal="true"
             />
 
-
 </RelativeLayout>
