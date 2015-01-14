@@ -4,5 +4,27 @@
     <string name="app_name">RisikousApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_questionnaire">QuestionnaireActivity</string>
+    <string name="title_activity_publications">PublicationsActivity</string>
+    <string name="title_activity_publication">PublicationActivity</string>
+    <string name="Meldung">Meldung</string>
+    <string name="Veröffentlichung">Veröffentlichungen</string>
+    <string name="welcome">Herzlich Willkommen bei Risikous</string>
+    <string name="weiter">Tippen Sie hier um fortzufahren</string>
+    <string name="Zwischenfallsmeldung">Zwischenfallsmeldung</string>
+    <string name="Pflichtfelder">* Pflichtfelder</string>
+    <string name="Meldekreis">Meldekreis *</string>
+    <string name="Ereignis">Ereignisbeschreibung *</string>
+    <string name="Risiko">Risikobewertung *</string>
+    <string name="EintrittsWS">Eintrittswahrscheinlichkeit</string>
+    <string name="mittel">mittel</string>
+    <string name="hoch">hoch</string>
+    <string name="niedrig">niedrig</string>
 
+
+
+    <string name="Änderung">Letzte Änderung</string>
+    <string name="Titel">Titel</string>
+    <string name="Status">Status</string>
 </resources>
