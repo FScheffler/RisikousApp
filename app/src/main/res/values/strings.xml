@@ -4,10 +4,10 @@
     <string name="app_name">RisikousApp</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_welcome">WelcomeActivity</string>
-    <string name="title_activity_questionnaire">QuestionnaireActivity</string>
-    <string name="title_activity_publications">PublicationsActivity</string>
-    <string name="title_activity_publication">PublicationActivity</string>
+    <string name="title_activity_welcome">Willkommen!</string>
+    <string name="title_activity_questionnaire">Zwischenfallsmeldung</string>
+    <string name="title_activity_publications">Veröffentlichungen</string>
+    <string name="title_activity_publication">Detailansicht der Veröffentlichung</string>
     <string name="Meldung">Meldung</string>
     <string name="Veröffentlichung">Veröffentlichungen</string>
     <string name="welcome">Herzlich Willkommen bei Risikous</string>

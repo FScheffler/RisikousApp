@@ -22,8 +22,9 @@ public class PublicationActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //Neues Intent anlegen
                 Intent ques = new Intent(getApplicationContext(), QuestionnaireActivity.class);
+                ques.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(ques);
-                finish();
+
             }
         });
 
@@ -33,6 +34,7 @@ public class PublicationActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //Neues Intent anlegen
                 Intent pub = new Intent(getApplicationContext(), PublicationsActivity.class);
+                pub.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(pub);
                 finish();
             }

@@ -1,8 +1,9 @@
 package de.risikous.views;
 
+import android.app.PendingIntent;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +23,9 @@ public class QuestionnaireActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //Neues Intent anlegen
                 Intent ques = new Intent(getApplicationContext(), QuestionnaireActivity.class);
+                ques.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(ques);
-                finish();
+
             }
         });
 
@@ -33,8 +35,9 @@ public class QuestionnaireActivity extends ActionBarActivity {
             public void onClick(View v) {
                 //Neues Intent anlegen
                 Intent pub = new Intent(getApplicationContext(), PublicationsActivity.class);
+                pub.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(pub);
-                finish();
+
             }
         });
     }
@@ -61,4 +64,19 @@ public class QuestionnaireActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+/**
+    // Intent for the activity to open when user selects the notification
+    Intent detailsIntent = new Intent(this, QuestionnaireActivity.class);
+
+    // Use TaskStackBuilder to build the back stack and get the PendingIntent
+    PendingIntent pendingIntent =
+            TaskStackBuilder.create(this)
+                    // add all of DetailsActivity's parents to the stack,
+                    // followed by DetailsActivity itself
+                    .addNextIntentWithParentStack(detailsIntent)
+                    .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+    builder.setContentIntent(pendingIntent);
+*/
 }

@@ -12,22 +12,33 @@
             android:label="@string/title_activity_welcome" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name="de.risikous.views.PublicationsActivity"
-            android:label="@string/title_activity_publications" >
+            android:label="@string/title_activity_publications">
         </activity>
+
         <activity
             android:name="de.risikous.views.QuestionnaireActivity"
-            android:label="@string/title_activity_questionnaire" >
+            android:label="@string/title_activity_questionnaire"
+            android:parentActivityName="de.risikous.views.PublicationsActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="de.risikous.views.PublicationsActivity" />
         </activity>
 
         <activity
             android:name="de.risikous.views.PublicationActivity"
-            android:label="@string/title_activity_publication" >
+            android:label="@string/title_activity_publication"
+            android:parentActivityName="de.risikous.views.PublicationsActivity" >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="de.risikous.views.PublicationsActivity" />
         </activity>
     </application>
 
