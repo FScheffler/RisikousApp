@@ -6,24 +6,96 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="de.risikous.views.PublicationActivity" android:background="#ff5492ff">
+                tools:context="de.risikous.views.PublicationActivity"
+                android:background="#ff5492ff">
 
 
     <Button
-    android:id="@+id/Meldung"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/Meldung"
-    android:layout_alignTop="@+id/Veröffentlichung" android:layout_alignParentLeft="true"
-    android:layout_alignParentStart="true"/>
+            android:id="@+id/Meldung"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Meldung"
+            android:layout_alignTop="@+id/Veröffentlichung"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"/>
 
     <Button
             android:id="@+id/Veröffentlichung"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="@string/Veröffentlichung" android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true" android:layout_alignParentEnd="true"/>
+            android:text="@string/Veröffentlichung"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView2"
+            android:layout_below="@+id/Meldung"
+            android:layout_marginTop="32dp">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+        <TableLayout
+                android:id="@+id/table1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp" >
+
+        </TableLayout>
+
+        <TableLayout
+                android:id="@+id/table2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp" >
+
+        </TableLayout>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="20dp"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:text="@string/NeuerKommentar"
+                  android:id="@+id/NeuerKommentar"
+                  android:background="#ffbac6ff"
+                  android:textColor="#000000"
+                  android:gravity="left"/>
+
+        <EditText
+                android:id="@+id/Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:layout_marginTop="2pt"
+                android:text="@string/IhrName"
+                android:gravity="left|center_vertical"
+                android:inputType="text"/>
+
+        <EditText
+                android:id="@+id/Kommentar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLength="1000"
+                android:inputType="textMultiLine"
+                android:text="@string/IhrKommentar"
+                android:gravity="left|center_vertical"/>
+
+        <Button
+                android:id="@+id/KommentarSenden"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="sendComment"
+                android:text="@string/Kommentar" />
+
+    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
 
 

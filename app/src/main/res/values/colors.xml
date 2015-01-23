@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="errorRed">#CE0000</color>
+    <color name="publicationsWhite">#E1E1E1</color>
+    <color name="risikousBlack">#000000</color>
+    <color name="risikousWhite">#FFFFFF</color>
+
+    
+</resources>

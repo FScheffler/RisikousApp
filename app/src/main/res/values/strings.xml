@@ -2,26 +2,42 @@
 <resources>
 
     <string name="app_name">RisikousApp</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_welcome">Willkommen!</string>
     <string name="title_activity_questionnaire">Zwischenfallsmeldung</string>
     <string name="title_activity_publications">Veröffentlichungen</string>
     <string name="title_activity_publication">Detailansicht der Veröffentlichung</string>
+
     <string name="Meldung">Meldung</string>
     <string name="Veröffentlichung">Veröffentlichungen</string>
+
     <string name="welcome">Herzlich Willkommen bei Risikous</string>
     <string name="weiter">Tippen Sie hier um fortzufahren</string>
+
     <string name="Zwischenfallsmeldung">Zwischenfallsmeldung</string>
-    <string name="Pflichtfelder">* Pflichtfelder</string>
-    <string name="Meldekreis">Meldekreis *</string>
-    <string name="Ereignis">Ereignisbeschreibung *</string>
-    <string name="Risiko">Risikobewertung *</string>
+    <string name="Meldekreis">Meldekreis</string>
+    <string name="Ereignis">Ereignisbeschreibung</string>
+    <string name="Risiko">Risikobewertung</string>
     <string name="EintrittsWS">Eintrittswahrscheinlichkeit</string>
+    <string name="EntdeckungsWS">Entdeckungswahrscheinlichkeit</string>
+    <string name="Bedeutung">Bedeutung</string>
     <string name="mittel">mittel</string>
     <string name="hoch">hoch</string>
     <string name="niedrig">niedrig</string>
+    <string name="Ereigniszeit">Wann ist das Ereignis passiert?</string>
+    <string name="Ereignisort">Wo ist das Ereignis passiert?</string>
+    <string name="Maßnahme">Was wurde als Sofortmaßnahme eingeleitet?</string>
+    <string name="Folgen">Folgen</string>
+    <string name="PFaktoren">Personenbezogene Faktoren</string>
+    <string name="OFaktoren">Organisatorische Faktoren</string>
+    <string name="Anmerkungen">Weitere Anmerkungen</string>
+    <string name="Kontaktdaten">Kontaktdaten</string>
+    <string name="Abschicken">Abschicken</string>
 
+    <string name="NeuerKommentar">Neuen Kommentar hinzufügen</string>
+    <string name="IhrName">Ihr Name (optional)</string>
+    <string name="IhrKommentar">Ihr Kommentar</string>
+    <string name="Kommentar">Kommentar hinzufügen</string>
 
     <string name="Änderung">Letzte Änderung</string>
     <string name="Titel">Titel</string>

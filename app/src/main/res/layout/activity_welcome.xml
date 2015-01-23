@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageButton"
             android:onClick="onButtonClicked"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_risikous"
             android:layout_below="@+id/weiter" android:layout_centerHorizontal="true"
             />
 

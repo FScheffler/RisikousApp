@@ -1,14 +1,14 @@
 package de.risikous.views;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import de.risikous.app.R;
 import android.view.View;
 
-public class WelcomeActivity extends ActionBarActivity {
+public class WelcomeActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
