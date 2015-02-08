@@ -5,8 +5,16 @@ import java.util.ArrayList;
 /**
  * Created by Franz on 09.01.2015.
  */
-public class ValidationResult {
+public class QuestionaireValidationResult {
     boolean errorsOccured=false;
+    boolean reportingAreaError=false;
+    String reportingAreaErrorMessage;
+    boolean occurrenceRatingError=false;
+    String occurrenceRatingErrorMessage;
+    boolean detectionRatingError=false;
+    String detectionRatingErrorMessage;
+    boolean significanceError=false;
+    String significanceErrorMessage;
     boolean incidentDescriptionError=false;
     String incidentDescriptionErrorMessage;// (maximal 1000 Zeichen)
     boolean dateError=false;
@@ -29,6 +37,78 @@ public class ValidationResult {
     String fileErrorMessage=null;
     boolean contactInformationError=false;
     String contactInformationErrorMessage=null;// (maximal 1000 Zeichen), optional
+
+
+    public String getSignificanceErrorMessage() {
+        return significanceErrorMessage;
+    }
+
+    public void setSignificanceErrorMessage(String significanceErrorMessage) {
+        this.significanceErrorMessage = significanceErrorMessage;
+    }
+
+    public boolean isOccurrenceRatingError() {
+        return occurrenceRatingError;
+    }
+
+    public void setOccurrenceRatingError(boolean occurrenceRatingError) {
+        this.occurrenceRatingError = occurrenceRatingError;
+    }
+
+    public String getOccurrenceRatingErrorMessage() {
+        return occurrenceRatingErrorMessage;
+    }
+
+    public void setOccurrenceRatingErrorMessage(String occurrenceRatingErrorMessage) {
+        this.occurrenceRatingErrorMessage = occurrenceRatingErrorMessage;
+    }
+
+    public boolean isDetectionRatingError() {
+        return detectionRatingError;
+    }
+
+    public void setDetectionRatingError(boolean detectionRatingError) {
+        this.detectionRatingError = detectionRatingError;
+    }
+
+    public String getDetectionRatingErrorMessage() {
+        return detectionRatingErrorMessage;
+    }
+
+    public void setDetectionRatingErrorMessage(String detectionRatingErrorMessage) {
+        this.detectionRatingErrorMessage = detectionRatingErrorMessage;
+    }
+
+    public boolean isSignificanceError() {
+        return significanceError;
+    }
+
+    public void setSignificanceError(boolean significanceError) {
+        this.significanceError = significanceError;
+    }
+    public String getReportingAreaErrorMessage() {
+        return reportingAreaErrorMessage;
+    }
+
+    public void setReportingAreaErrorMessage(String reportingAreaErrorMessage) {
+        this.reportingAreaErrorMessage = reportingAreaErrorMessage;
+    }
+
+    public boolean isErrorsOccured() {
+        return errorsOccured;
+    }
+
+    public void setErrorsOccured(boolean errorsOccured) {
+        this.errorsOccured = errorsOccured;
+    }
+
+    public boolean isReportingAreaError() {
+        return reportingAreaError;
+    }
+
+    public void setReportingAreaError(boolean reportingAreaError) {
+        this.reportingAreaError = reportingAreaError;
+    }
 
     public boolean hasErrors() {
         return errorsOccured;

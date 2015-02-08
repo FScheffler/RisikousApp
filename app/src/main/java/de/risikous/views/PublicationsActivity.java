@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.content.Intent;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -17,12 +18,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import de.risikous.app.R;
 import de.risikous.model.entitys.EntityManager;
-import de.risikous.model.entitys.PublicationsGenerator;
+import de.risikous.model.entitys.OverviewEntry;
+import de.risikous.util.QuestionaireDummyFactory;
+import de.risikous.views.util.OverviewEntryRowGenerator;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 public class PublicationsActivity extends Activity {
 
@@ -67,18 +68,21 @@ public class PublicationsActivity extends Activity {
      * @param table to which the publications are added
      * */
     private void fillTable(TableLayout table) {
+
         TableRow head = new TableRow(this);
         head.setGravity(Gravity.CENTER_HORIZONTAL);
         createTableHead(head);
         table.addView(head);
 
-        //??? von REST-SChnittstelle
-        EntityManager entityManager = new EntityManager();
-        entityManager.getOverviewEntrys();
 
-        //String xml = get.getXml();
-        PublicationsGenerator generator = new PublicationsGenerator(PublicationsActivity.this);
-        LinkedList<TableRow> rows = generator.getPublications(xml, head.getContext(), getScreenWidth());
+        QuestionaireDummyFactory factory =new QuestionaireDummyFactory();
+        ArrayList<OverviewEntry> overViewEntrys = factory.getOverviewDummys();
+        //EntityManager entityManager = new EntityManager();
+        //ArrayList<OverviewEntry> overViewEntrys= entityManager.getOverviewEntrys();
+
+
+        OverviewEntryRowGenerator generator = new OverviewEntryRowGenerator(PublicationsActivity.this);
+        LinkedList<TableRow> rows = generator.getPublications(overViewEntrys, head.getContext(), getScreenWidth());
 
         if(rows.size() > 0) {
             for(int i=0; i<rows.size(); i++) {
@@ -100,8 +104,8 @@ public class PublicationsActivity extends Activity {
             table.addView(row);
         }
     }
-
     /**
+
      * creates the table head
      * @param head to which the items are added
      * */
@@ -116,9 +120,8 @@ public class PublicationsActivity extends Activity {
         setLayout(titleText);
 
         TextView statusText = new TextView(this);
-        titleText.setText("Status");
+        statusText.setText("Status");
         setLayout(statusText);
-
 
         head.addView(changedText);
         head.addView(titleText);
@@ -127,7 +130,7 @@ public class PublicationsActivity extends Activity {
 
     private void setLayout(TextView view) {
         view.setTextColor(view.getContext().getResources().getColor(R.color.publicationsWhite));
-        view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
         view.setGravity(Gravity.CENTER);
         view.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
     }

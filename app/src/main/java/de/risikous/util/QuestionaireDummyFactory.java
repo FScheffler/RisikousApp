@@ -1,9 +1,13 @@
 package de.risikous.util;
 
-import de.risikous.model.entitys.OpinionOfReporter;
-import de.risikous.model.entitys.PointOfTime;
-import de.risikous.model.entitys.Questionaire;
-import de.risikous.model.entitys.RiskEstimation;
+import de.risikous.model.entitys.*;
+
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Created by Franz on 08.01.2015.
@@ -54,6 +58,27 @@ public class QuestionaireDummyFactory {
         result.setPersonalFactors("<;>");
         result.setAdditionalNotes("<;>");
         result.setOrganisationalFactors("<;>");
+        return result;
+    }
+
+    public ArrayList<OverviewEntry> getOverviewDummys() {
+        ArrayList<OverviewEntry>result=new ArrayList<>();
+        for(int i =0; i<4;i++){
+            OverviewEntry toAdd=new OverviewEntry();
+            toAdd.setId(String.valueOf(i));
+            toAdd.setStatus("abgeschlossen");
+            DateFormat format = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMAN);
+            String datum=i + ".2.2015";
+
+            try {
+               Date date = format.parse(datum);
+                toAdd.setRevisionDate(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            toAdd.setTitle("fehler");
+            result.add(toAdd);
+        }
         return result;
     }
 }

@@ -1,4 +1,4 @@
-package de.risikous.model.entitys;
+package de.risikous.views.util;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -11,59 +11,44 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TableRow;
 import android.widget.TextView;
+import de.risikous.model.entitys.EntityManager;
+import de.risikous.model.entitys.OverviewEntry;
 import de.risikous.views.PublicationActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class PublicationsGenerator {
+public class OverviewEntryRowGenerator {
 
 	private int screenWidth;
 	private Context context;
 	private Context activityContext;
 	
-	public PublicationsGenerator(Context context) {
+	public OverviewEntryRowGenerator(Context context) {
 		this.activityContext = context;
 	}
 
 	/**
 	 * gets all Publications
-	 * @param xml structure to be parsed
 	 * @param context context of the calling class
 	 * @param screenWidth width of screen
 	 * @return TableRows to be added to a TableLayout
 	 * */
 	@SuppressLint("ResourceAsColor")
-	public LinkedList<TableRow> getPublications(String xml, Context context, int screenWidth) {
+	public LinkedList<TableRow> getPublications(ArrayList<OverviewEntry> entrys, Context context, int screenWidth) {
 		setScreenWidth(screenWidth);
 		setContext(context);
 		LinkedList<TableRow> rows = new LinkedList<TableRow>();
 
-		EntityManager entityManager = new EntityManager();
-		entityManager.getOverviewEntrys();
-
-
-		// ??? publications parsen?
-		//Parser parser = new Parser();
-		//parser.getPublications(xml);
-
-		//LinkedList<String> ids = entityManager.get...
-
-		LinkedList<String> id = new LinkedList<String>();
+        LinkedList<String> revisionDate = new LinkedList<String>();
 		LinkedList<String> title = new LinkedList<String>();
-		LinkedList<String> revisionDate = new LinkedList<String>();
 		LinkedList<String> status = new LinkedList<String>();
-		
-		//LinkedList<String> ids = parser.getIds();
-		//LinkedList<String> titles = parser.getTitles();
-		//LinkedList<String> changed = parser.getChanged();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
-		
-		if(id.size() != title.size() && revisionDate.size() != status.size() && id.size() != status.size()) {
-			Log.d("FEHLER", "ids:" + id.size() + " titles:" + title.size() + " created:" + revisionDate.size() + " changed:" + status.size());
-		}
-		else {
-			for(int i=0; i<id.size(); i++) {
+			for(int i=0; i<entrys.size(); i++) {
 				TableRow space = new TableRow(context);
 				space.setPadding(0, 1, 0, 0);
 				space.setBackgroundColor(getContext().getResources().getColor(android.R.color.black));
@@ -71,15 +56,15 @@ public class PublicationsGenerator {
 				
 				final TableRow row = new TableRow(getContext());
 				row.setGravity(Gravity.CENTER_HORIZONTAL);
-				addEntry(row, id.get(i));
-				addEntry(row, revisionDate.get(i));
-				addTitle(row, title.get(i));
-				addEntry(row, status.get(i));
+                String reportDate = df.format(entrys.get(i).getRevisionDate());
+				addEntry(row,reportDate);
+				addTitle(row, entrys.get(i).getTitle(),entrys.get(i).getId());
+				addEntry(row, entrys.get(i).getStatus());
 
 				
 				rows.add(row);
 			}
-		}
+
 		
 		return rows;
 	}
@@ -100,23 +85,10 @@ public class PublicationsGenerator {
 	 * @param row TableRow the TextView is added
 	 * @param title to be set
 	 * */
-	private void addTitle(TableRow row, String title) {
+	private void addTitle(TableRow row, String title, String id) {
 		final TextView view = getTextView(row, false);
 		view.setText(title);
-		view.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				TableRow row = (TableRow) view.getParent();
-				TextView id = (TextView) row.getChildAt(0);
-				Log.d("TOUCH", "ID: " + id.getText());
-				
-				Intent intent = new Intent(getActivityContext(), PublicationActivity.class);
-				intent.putExtra("ID", id.getText());
-				activityContext.startActivity(intent);
-			}
-			
-		});
+		view.setOnClickListener(new OverViewRowClickListener(id,getActivityContext()));
 		row.addView(view);		
 	}
 	

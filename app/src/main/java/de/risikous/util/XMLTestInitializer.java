@@ -3,8 +3,7 @@ package de.risikous.util;
 import de.risikous.model.entitys.*;
 import de.risikous.model.validation.QuestionaireValidation;
 import de.risikous.model.validation.QuestionaireValidationRules;
-import de.risikous.model.validation.ValidationResult;
-import de.risikous.model.xml.Object2XML;
+import de.risikous.model.validation.QuestionaireValidationResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +13,8 @@ import java.util.List;
  */
 public class XMLTestInitializer {
 
-    public static void main(String[ ] args) {
-        testSpecificPublication("26");
+   // public static void main(String[ ] args) {
+        //testSpecificPublication("26");
         //testSpecificPublicationAsString("26");
         //testOverviewEntrys();
         //testQuestionaireSkeleton();
@@ -24,7 +23,7 @@ public class XMLTestInitializer {
         //testQuestionaireValidation();
         //testGetCommentsForSpecificPublification("10");
         //testGetCommentsForSpecificPublificationAsString("10");
-    }
+    //}
     public static void testSpecificPublicationAsString(String id){
         EntityManager em = new EntityManager();
         System.out.println(em.getSpecificPublificationAsString("26"));
@@ -40,19 +39,23 @@ public class XMLTestInitializer {
         System.out.println("id: "+comments.get(i).getId()+" author: "+comments.get(i).getAuthor()+" text: "+comments.get(i).getText()+" timestamp: "+comments.get(i).getTimeStamp());
     }
     public static void testGetAllReportingAreas(){
-        EntityManager em = new EntityManager();
-        List<ReportingArea>list=em.getAllReportingArea();
-        for(int i=0; i<list.size();i++)
-        System.out.println("shortcut: "+list.get(i).getShortcut()+" name: "+list.get(i).getName());
+        try {
+            EntityManager em = new EntityManager();
+            List<ReportingArea> list = em.getAllReportingArea();
+            for (int i = 0; i < list.size(); i++)
+                System.out.println("shortcut: " + list.get(i).getShortcut() + " name: " + list.get(i).getName());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public static void testQuestionaireValidation(){
         QuestionaireDummyFactory df= new QuestionaireDummyFactory();
         Questionaire qs=df.getCompleteFalseQuestionaire();
         QuestionaireValidation validation = new QuestionaireValidation();
         QuestionaireValidationRules rules= new QuestionaireValidationRules();
-        ValidationResult validationResult=validation.validate(qs, rules);
-        if(validationResult.hasErrors()){
-            List<String>errorMessages=validationResult.getAllErrorMessages();
+        QuestionaireValidationResult questionaireValidationResult =validation.validate(qs, rules);
+        if(questionaireValidationResult.hasErrors()){
+            List<String>errorMessages= questionaireValidationResult.getAllErrorMessages();
             for(int i = 0; i<errorMessages.size();i++)
                 System.out.println(errorMessages.get(i));
         }else{
@@ -85,7 +88,8 @@ public class XMLTestInitializer {
     public static void testQuestionaireSkeleton(){
         EntityManager em = new EntityManager();
         System.out.println(em.getQuestionaireSkeletonAsString());
-    }/*
+    }
+    /*
     public static void testPost(){
         EntityManager em = new EntityManager();
         QuestionaireDummyFactory dum= new QuestionaireDummyFactory();

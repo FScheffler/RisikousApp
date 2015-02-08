@@ -12,6 +12,7 @@ import android.widget.*;
 import de.risikous.app.R;
 import de.risikous.model.entitys.*;
 import de.risikous.model.validation.QuestionaireValidation;
+import de.risikous.model.validation.QuestionaireValidationResult;
 import de.risikous.model.validation.QuestionaireValidationRules;
 
 import java.text.SimpleDateFormat;
@@ -73,64 +74,28 @@ public class QuestionnaireActivity extends Activity {
             QuestionaireValidation quesval = new QuestionaireValidation();
             QuestionaireValidationRules rules = new QuestionaireValidationRules();
 
+            ques.setReportingArea(getCurrentMeldekreis());
+            ques.setIncidentDescription(getIncidentDiscription());
+            ques.setRiskEstimation(getRiskestimationValues());
+            ques.setPointOfTime(getPointOfTimeValues());//optional
+            ques.setLocation(getLocationValue());// (maximal 50 Zeichen), optional
+            ques.setImmediateMeasure(getImmediateMeasureValue());//(maximal 1000 Zeichen), optional
+            ques.setConsequences(getConsequencesValue());//(maximal 1000 Zeichen), optional
+            ques.setOpinionOfReporter(getOpinionOfReporter());//opinionOfReporter=null;//optional
+            //List<File> files=null;//optional
+            ques.setContactInformation(getContactInformation());// (maximal 1000 Zeichen), optional
 
-            String reportingArea = getCurrentMeldekreis();
-            ques.setReportingArea(reportingArea);
-            EditText incidentDescription = (EditText) findViewById(R.id.Ereigniseingabe);
-            ques.setIncidentDescription(incidentDescription.getText().toString());
+            QuestionaireValidationResult validationResult= quesval.validate(ques, rules);
+            if(validationResult.hasErrors()){
+                //Fehlerhandling hier
+            }else{
+                try {
+                    EntityManager em = new EntityManager();
+                    em.persistQuestionaire(ques);
+                }catch(Exception e){
 
-            RiskEstimation riskEstimation = new RiskEstimation();
-            ques.setRiskEstimation(riskEstimation);
-            RadioGroup radio1 = (RadioGroup) findViewById(R.id.radioGroup1);
-            addSelectedRadioButton(riskEstimation, radio1);
-           // riskEstimation.setOccurrenceRating();
-            RadioGroup radio2 = (RadioGroup) findViewById(R.id.radioGroup2);
-            addSelectedRadioButton(riskEstimation, radio2);
-            RadioGroup radio3 = (RadioGroup) findViewById(R.id.radioGroup3);
-            addSelectedRadioButton(riskEstimation, radio3);
-
-            PointOfTime pointOfTime = new PointOfTime();
-            //if(pointOfTime !=null)
-            ques.setPointOfTime(pointOfTime);
-
-            DatePicker date = (DatePicker) findViewById(R.id.datePicker1);
-            @SuppressWarnings("deprecation")
-            Date pickedDate = new Date((date.getYear()-1900), (date.getMonth()+1), date.getDayOfMonth());
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.mm.yyyy");
-            String dateString = dateFormatter.format(pickedDate);
-            pointOfTime.setDate(dateString);
-
-            TimePicker time = (TimePicker) findViewById(R.id.timePicker1);
-            String timeString = String.format("hh:mm", time.getCurrentHour(), time.getCurrentMinute()); //"%02d:%02d"
-            pointOfTime.setTime(timeString);
-
-            EditText location = (EditText) findViewById(R.id.Orteingabe);
-            //if(location.getText()!=null)
-            ques.setLocation(location.getText().toString());
-            EditText immediateMeasure = (EditText) findViewById(R.id.Maßnahmeeingabe);
-           // if(immediateMeasure.getText()!=null)
-            ques.setImmediateMeasure(immediateMeasure.getText().toString());
-            EditText consequences = (EditText) findViewById(R.id.Folgeneingabe);
-           // if(consequences.getText()!=null)
-            ques.setConsequences(consequences.getText().toString());
-
-            OpinionOfReporter opinion = new OpinionOfReporter();
-            ques.setOpinionOfReporter(opinion);
-            EditText personalFactors = (EditText) findViewById(R.id.PFaktoreneingabe);
-            //if(personalFactors.getText()!=null)
-            opinion.setPersonalFactors(personalFactors.getText().toString());
-            EditText organisationalFactors = (EditText) findViewById(R.id.OFaktoreneingabe);
-            //if(organisationalFactors.getText()!=null)
-            opinion.setOrganisationalFactors(organisationalFactors.getText().toString());
-            EditText additionalNotes = (EditText) findViewById(R.id.Anmerkungeneingabe);
-            //if(additionalNotes.getText()!=null)
-            opinion.setAdditionalNotes(additionalNotes.getText().toString());
-
-            EditText contactInformation = (EditText) findViewById(R.id.Kontakteingabe);
-            //if(contactInformation.getText()!=null)
-            ques.setContactInformation(contactInformation.getText().toString());
-
-            quesval.validate(ques, rules);
+                }
+            }
         }
 
     /**
@@ -138,14 +103,10 @@ public class QuestionnaireActivity extends Activity {
      * @param spinner Spinner to which the entries are added
      * */
     public void addEntries(Spinner spinner) {
-        List<String> list = new ArrayList<String>();
-        String[] entries = getMeldekreise();
+        List<String> areas = getMeldekreiseAsStringList();
 
-        for (int i = 0; i < entries.length; i++) {
-            list.add(entries[i]);
-        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, areas);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -167,20 +128,17 @@ public class QuestionnaireActivity extends Activity {
     /**???
      * gets reporting areas and collects all parsed areas
      * */
-    public String[] getMeldekreise() {
-        String[] areas = {};
+    public ArrayList<String> getMeldekreiseAsStringList() {
+        ArrayList<String> result = new ArrayList<>();
+        try{
+            EntityManager entityManager = new EntityManager();
+            ArrayList<ReportingArea>areaList=entityManager.getAllReportingArea();
+            for(int i =0;i<areaList.size();i++)
+                result.add(areaList.get(i).getShortcut());
 
-
-        EntityManager entityManager = new EntityManager();
-        entityManager.getAllReportingArea();
-        //areas...
-
-
-        if(areas.length == 0) {
-            areas = new String[]{"Keine Einträge"};
+        }catch(Exception e){
         }
-
-        return areas;
+        return result;
     }
 
     private String getCurrentMeldekreis() {
@@ -192,18 +150,94 @@ public class QuestionnaireActivity extends Activity {
     }
 
 
-
-    /**???
-     * adds the selected radiobutton to the list for questionnaire generation
-     * @param riskEst RiskEstimation with occurrenceRating, detectionRating, significance
-     * @param group RadioGroup to search for the selected RadioButton
-     * */
-    private void addSelectedRadioButton(RiskEstimation riskEst, RadioGroup group) {
-        RadioButton radio = (RadioButton) group.findViewById(group.getCheckedRadioButtonId());
-        int index = group.indexOfChild(radio) + 1;
-       // riskEstimation.add(""+index);
+    private String getIncidentDiscription(){
+        EditText incidentDescription = (EditText) findViewById(R.id.Ereigniseingabe);
+        if(incidentDescription.getText()!=null)
+            return incidentDescription.getText().toString();
+        return null;
+    }
+    private String getLocationValue() {
+        EditText location = (EditText) findViewById(R.id.Orteingabe);
+        if(location.getText()!=null)
+            return location.getText().toString();
+        return null;
+    }
+    private String getImmediateMeasureValue() {
+        EditText immediateMeasure = (EditText) findViewById(R.id.Maßnahmeeingabe);
+        if(immediateMeasure.getText()!=null)
+            return immediateMeasure.getText().toString();
+        return null;
+    }
+    private String getConsequencesValue() {
+        EditText consequences = (EditText) findViewById(R.id.Folgeneingabe);
+        if(consequences.getText()!=null)
+            return consequences.getText().toString();
+        return null;
+    }
+    private String getContactInformation(){
+        EditText contactInformation = (EditText) findViewById(R.id.Kontakteingabe);
+        if(contactInformation.getText()!=null)
+            return contactInformation.getText().toString();
+        return null;
     }
 
+    private RiskEstimation getRiskestimationValues(){
+        RiskEstimation result=new RiskEstimation();
+        RadioGroup radio1 = (RadioGroup) findViewById(R.id.radioGroup1);
+        RadioGroup radio2 = (RadioGroup) findViewById(R.id.radioGroup2);
+        RadioGroup radio3 = (RadioGroup) findViewById(R.id.radioGroup3);
+
+        if(radio1.getCheckedRadioButtonId()!=-1){
+        RadioButton checkedOccurenceRadioButton = (RadioButton) radio1.findViewById(radio1.getCheckedRadioButtonId());
+        int occurenceRate = radio1.indexOfChild(checkedOccurenceRadioButton) + 1;
+        result.setOccurrenceRating(String.valueOf(occurenceRate));
+        }
+
+        if(radio2.getCheckedRadioButtonId()!=-1) {
+            RadioButton checkedDetectionRadioButton = (RadioButton) radio1.findViewById(radio2.getCheckedRadioButtonId());
+            int detectionRate = radio1.indexOfChild(checkedDetectionRadioButton) + 1;
+            result.setDetectionRating(String.valueOf(detectionRate));
+        }
+
+        if(radio3.getCheckedRadioButtonId()!=-1) {
+            RadioButton checkedSignificanceRadioButton = (RadioButton) radio1.findViewById(radio3.getCheckedRadioButtonId());
+            int significanceRate = radio1.indexOfChild(checkedSignificanceRadioButton) + 1;
+            result.setSignificance(String.valueOf(significanceRate));
+        }
+        return result;
+    }
+
+    private OpinionOfReporter getOpinionOfReporter(){
+        OpinionOfReporter opinion = new OpinionOfReporter();
+
+        EditText personalFactors = (EditText) findViewById(R.id.PFaktoreneingabe);
+        if(personalFactors.getText()!=null)
+        opinion.setPersonalFactors(personalFactors.getText().toString());
+        EditText organisationalFactors = (EditText) findViewById(R.id.OFaktoreneingabe);
+        if(organisationalFactors.getText()!=null)
+        opinion.setOrganisationalFactors(organisationalFactors.getText().toString());
+        EditText additionalNotes = (EditText) findViewById(R.id.Anmerkungeneingabe);
+        if(additionalNotes.getText()!=null)
+        opinion.setAdditionalNotes(additionalNotes.getText().toString());
+
+        return opinion;
+    }
+
+    private PointOfTime getPointOfTimeValues(){
+        PointOfTime result=new PointOfTime();
+        DatePicker date = (DatePicker) findViewById(R.id.datePicker1);
+        @SuppressWarnings("deprecation")
+        Date pickedDate = new Date((date.getYear()-1900), (date.getMonth()+1), date.getDayOfMonth());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd.mm.yyyy");
+        String dateString = dateFormatter.format(pickedDate);
+        result.setDate(dateString);
+
+        TimePicker time = (TimePicker) findViewById(R.id.timePicker1);
+        String timeString = String.format("hh:mm", time.getCurrentHour(), time.getCurrentMinute()); //"%02d:%02d"
+        result.setTime(timeString);
+
+        return result;
+    }
 
 
         @Override

@@ -8,22 +8,26 @@ import de.risikous.model.entitys.Questionaire;
  * Created by Franz on 09.01.2015.
  */
 public class QuestionaireValidation {
-    char[] invalideCharacters={'<','>',';'};
-    ValidationResult errors=new ValidationResult();
-    Questionaire q=new Questionaire();
-    QuestionaireValidationRules r=new QuestionaireValidationRules ();
+    QuestionaireValidationResult errors=new QuestionaireValidationResult();
+    Questionaire q;
+    QuestionaireValidationRules r;
+    char invalideCharacters[];
 
-    public ValidationResult validate(Questionaire q, QuestionaireValidationRules rules){
+    public QuestionaireValidationResult validate(Questionaire q, QuestionaireValidationRules rules){
             this.q=q;
             this.r=rules;
+            invalideCharacters=r.getInvalideCharacters();
             validateRequiredFields();
             validateOptionalFields();
             setHasErrors();
         return errors;
     }
     private void validateRequiredFields(){
+        validateReportingArea();
+        validateRiskEstimations();
         validateIncidentDescription();
     }
+
     private void validateOptionalFields(){
         validatePointOfTime();
         validateLocation();
@@ -32,15 +36,67 @@ public class QuestionaireValidation {
         validateOpinionOfReporter();
         validateContactInformation();
     }
-    private void validateIncidentDescription(){
-        String toValidate=q.getIncidentDescription();
-        if(hasInvalideCharacters(toValidate)){
-            errors.setIncidentDescriptionError(true);
-            errors.setIncidentDescriptionErrorMessage("Die Zeichen '<','>' und ';' sind nicht erlaubt");
+    private void validateReportingArea() {
+        if(q.getIncidentDescription()==null) {
+            errors.setReportingAreaError(true);
+            errors.setReportingAreaErrorMessage("Dieses Pflichtfeld fehlt");
         }
-        if(toValidate.length()>r.getIncidentDescriptionLength()){
+    }
+    private void validateRiskEstimations(){
+        validateOccurrenceRating();
+        ValidateDetectionRating();
+        validateSignificance();
+    }
+
+    private void validateOccurrenceRating() {
+        if(q.getRiskEstimation().getOccurrenceRating()!=null) {
+            if(hasInvalideOccurenceValues(q.getRiskEstimation().getOccurrenceRating())){
+                errors.setOccurrenceRatingError(true);
+                errors.setOccurrenceRatingErrorMessage("Dieses Pflichtfeld fehlt");
+            }
+        }else{
+            errors.setOccurrenceRatingError(true);
+            errors.setOccurrenceRatingErrorMessage("Dieses Pflichtfeld fehlt");
+        }
+    }
+    private void ValidateDetectionRating() {
+        if(q.getRiskEstimation().getDetectionRating()!=null) {
+            if(hasInvalideDetectionValues(q.getRiskEstimation().getDetectionRating())){
+                errors.setDetectionRatingError(true);
+                errors.setDetectionRatingErrorMessage("Dieses Pflichtfeld fehlt");
+            }
+        }else{
+            errors.setDetectionRatingError(true);
+            errors.setDetectionRatingErrorMessage("Dieses Pflichtfeld fehlt");
+        }
+    }
+    private void validateSignificance() {
+        if(q.getRiskEstimation().getSignificance()!=null) {
+            if(hasInvalideSignificanceValues(q.getRiskEstimation().getSignificance())){
+                errors.setSignificanceError(true);
+                errors.setSignificanceErrorMessage("Dieses Pflichtfeld fehlt");
+            }
+        }else{
+            errors.setSignificanceError(true);
+            errors.setSignificanceErrorMessage("Dieses Pflichtfeld fehlt");
+        }
+    }
+
+
+    private void validateIncidentDescription(){
+        if(q.getIncidentDescription()!=null) {
+            String toValidate = q.getIncidentDescription();
+            if (hasInvalideCharacters(toValidate)) {
+                errors.setIncidentDescriptionError(true);
+                errors.setIncidentDescriptionErrorMessage("Die Zeichen '<','>' und ';' sind nicht erlaubt");
+            }
+            if (toValidate.length() > r.getIncidentDescriptionLength()) {
+                errors.setIncidentDescriptionError(true);
+                errors.setIncidentDescriptionErrorMessage("Sie haben die maximale Zeichenlänge von" + r.getIncidentDescriptionLength() + " überschritten");
+            }
+        }else{
             errors.setIncidentDescriptionError(true);
-            errors.setIncidentDescriptionErrorMessage("Sie haben die maximale Zeichenlänge von"+r.getIncidentDescriptionLength()+" überschritten");
+            errors.setIncidentDescriptionErrorMessage("Dieses Pflichtfeld fehlt");
         }
     }
     private void validatePointOfTime(){
@@ -167,14 +223,38 @@ public class QuestionaireValidation {
             }
         }
     }
+    private boolean hasInvalideOccurenceValues(String toValidate) {
+        String[] valideValues=r.getValidOccurrenceRatingValues();
+        for(int i =0; i<valideValues.length;i++)
+            if(toValidate.contains(String.valueOf(valideValues[i])))
+                return false;
+        return true;
+    }
+    private boolean hasInvalideSignificanceValues(String toValidate) {
+        String[] valideValues=r.getValidSignificanceValues();
+        for(int i =0; i<valideValues.length;i++)
+            if(toValidate.contains(String.valueOf(valideValues[i])))
+                return false;
+        return true;
+    }
+    private boolean hasInvalideDetectionValues(String toValidate) {
+        String[] valideValues=r.getValidDetectionRatingValues();
+        for(int i =0; i<valideValues.length;i++)
+            if(toValidate.equals(String.valueOf(valideValues[i])))
+                return false;
+        return true;
+    }
     private boolean hasInvalideCharacters(String toValidate){
+        char[] invalideCharacters=r.getInvalideCharacters();
         for(int i =0; i<invalideCharacters.length;i++)
             if(toValidate.contains(String.valueOf(invalideCharacters[i])))
                 return true;
         return false;
     }
+
     private void setHasErrors(){
-        if(errors.immediateMeasurError||errors.isIncidentDescriptionError()||errors.isDateError()
+        if(     errors.isReportingAreaError()||errors.isSignificanceError()||errors.isOccurrenceRatingError()||errors.isDetectionRatingError()||
+                errors.immediateMeasurError||errors.isIncidentDescriptionError()||errors.isDateError()
                 ||errors.isTimeError()||errors.isLocationError()||errors.isImmediateMeasurError()
                 ||errors.isConsequencesError()||errors.isPersonalFactorsError()||errors.isOrganisationalFactorsError()
                 ||errors.isAdditionalNotesError()||errors.isFilesError()||errors.isContactInformationError())

@@ -80,7 +80,7 @@ public class PublicationActivity extends Activity {
 
         //LinkedList<Comment> comments = commentsParser.getComments();
         String[] names = new String[]{"Autor: ", "Datum: ", "Text: "};
-
+        /*
         if(comments.size() == 0) {
             TableRow row = new TableRow(this);
             row.setGravity(Gravity.CENTER);
@@ -133,7 +133,7 @@ public class PublicationActivity extends Activity {
                         answerbutton.setText("Antworten");
                         //answerbutton.setOnClickListener(new View.OnClickListener() {
 
-                            /* TODO */
+                            /* TODO
                           //  }
 
                         //});
@@ -149,7 +149,8 @@ public class PublicationActivity extends Activity {
                 spaceLarge.setBackgroundColor(getResources().getColor(R.color.risikousBlack));
                 table.addView(spaceLarge);
             }
-        }
+
+        }*/
     }
 
     /**
@@ -188,7 +189,7 @@ public class PublicationActivity extends Activity {
 
         //LinkedList<String> infos = publicationParser.getPublicationInformation();
         String[] names = new String[]{"Titel: ", "Bericht: ", "Kategorie: ", "Lösung: "};
-
+        /*
         if(infos.size() == 0) {
             TableRow row = new TableRow(this);
             row.setGravity(Gravity.CENTER);
@@ -231,7 +232,7 @@ public class PublicationActivity extends Activity {
                 row.addView(textRight);
                 table.addView(row);
             }
-        }
+        }*/
     }
 
 
