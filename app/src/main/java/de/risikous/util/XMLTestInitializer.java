@@ -20,6 +20,7 @@ public class XMLTestInitializer {
         //testQuestionaireSkeleton();
         //testPost();
         //testGetAllReportingAreas();
+        //testGetAllReportingAreasAsString();
         //testQuestionaireValidation();
         //testGetCommentsForSpecificPublification("10");
         //testGetCommentsForSpecificPublificationAsString("10");
@@ -27,6 +28,14 @@ public class XMLTestInitializer {
     public static void testSpecificPublicationAsString(String id){
         EntityManager em = new EntityManager();
         System.out.println(em.getSpecificPublificationAsString("26"));
+    }
+    public static void testGetAllReportingAreasAsString(){
+        try {
+            EntityManager em = new EntityManager();
+            System.out.println(em.getAllReportingAreasAsString());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     public static void testGetCommentsForSpecificPublificationAsString(String id){
         EntityManager em = new EntityManager();

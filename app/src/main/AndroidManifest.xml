@@ -16,7 +16,8 @@
 
         <activity
             android:name="de.risikous.views.WelcomeActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -25,13 +26,15 @@
 
         <activity
             android:name="de.risikous.views.PublicationsActivity"
-            android:label="@string/title_activity_publications">
+            android:label="@string/title_activity_publications"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="de.risikous.views.QuestionnaireActivity"
             android:label="@string/title_activity_questionnaire"
-            android:parentActivityName="de.risikous.views.PublicationsActivity" >
+            android:parentActivityName="de.risikous.views.PublicationsActivity"
+            android:screenOrientation="portrait">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -41,7 +44,8 @@
         <activity
             android:name="de.risikous.views.PublicationActivity"
             android:label="@string/title_activity_publication"
-            android:parentActivityName="de.risikous.views.PublicationsActivity" >
+            android:parentActivityName="de.risikous.views.PublicationsActivity"
+            android:screenOrientation="portrait">
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

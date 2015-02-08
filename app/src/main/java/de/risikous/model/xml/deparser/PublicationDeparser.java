@@ -55,7 +55,7 @@ public class PublicationDeparser {
     private String getConsequences(Questionaire q){
         String result="";
         if(q.getConsequences()!=null)
-            result+="<consequences>"+q.getImmediateMeasure()+"</consequences>";
+            result+="<consequences>"+q.getConsequences()+"</consequences>";
         return result;
     }
     private String getOpinionOfReporter(Questionaire q){

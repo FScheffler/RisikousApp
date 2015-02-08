@@ -75,10 +75,10 @@ public class PublicationsActivity extends Activity {
         table.addView(head);
 
 
-        QuestionaireDummyFactory factory =new QuestionaireDummyFactory();
-        ArrayList<OverviewEntry> overViewEntrys = factory.getOverviewDummys();
-        //EntityManager entityManager = new EntityManager();
-        //ArrayList<OverviewEntry> overViewEntrys= entityManager.getOverviewEntrys();
+        //QuestionaireDummyFactory factory =new QuestionaireDummyFactory();
+        //ArrayList<OverviewEntry> overViewEntrys = factory.getOverviewDummys();
+        EntityManager entityManager = new EntityManager();
+        ArrayList<OverviewEntry> overViewEntrys= entityManager.getOverviewEntrys();
 
 
         OverviewEntryRowGenerator generator = new OverviewEntryRowGenerator(PublicationsActivity.this);

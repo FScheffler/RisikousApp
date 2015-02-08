@@ -37,7 +37,7 @@ public class QuestionaireValidation {
         validateContactInformation();
     }
     private void validateReportingArea() {
-        if(q.getIncidentDescription()==null) {
+        if(q.getReportingArea().length()==0) {
             errors.setReportingAreaError(true);
             errors.setReportingAreaErrorMessage("Dieses Pflichtfeld fehlt");
         }
@@ -84,7 +84,7 @@ public class QuestionaireValidation {
 
 
     private void validateIncidentDescription(){
-        if(q.getIncidentDescription()!=null) {
+        if(q.getIncidentDescription().length()!=0) {
             String toValidate = q.getIncidentDescription();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setIncidentDescriptionError(true);
@@ -125,7 +125,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateLocation(){
-        if(q.getLocation()!=null) {
+        if(q.getLocation().length()!=0) {
             String toValidate = q.getLocation();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setLocationError(true);
@@ -138,7 +138,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateImmediateMeasure(){
-        if(q.getImmediateMeasure()!=null) {
+        if(q.getImmediateMeasure().length()!=0) {
             String toValidate = q.getImmediateMeasure();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setImmediateMeasurError(true);
@@ -151,7 +151,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateConsequences(){
-        if(q.getConsequences()!=null) {
+        if(q.getConsequences().length()!=0) {
             String toValidate = q.getConsequences();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setConsequencesError(true);
@@ -172,7 +172,7 @@ public class QuestionaireValidation {
         }
     }
     private void validatePersonalFactors(OpinionOfReporter op){
-        if(op.getPersonalFactors()!=null) {
+        if(op.getPersonalFactors().length()!=0) {
             String toValidate = op.getPersonalFactors();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setPersonalFactorsError(true);
@@ -185,7 +185,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateOrganisationalFactors(OpinionOfReporter op){
-        if(op.getOrganisationalFactors()!=null) {
+        if(op.getOrganisationalFactors().length()!=0) {
             String toValidate = op.getOrganisationalFactors();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setOrganisationalFactorsError(true);
@@ -198,7 +198,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateAdditionalNotes(OpinionOfReporter op){
-        if(op.getAdditionalNotes()!=null) {
+        if(op.getAdditionalNotes().length()!=0) {
             String toValidate = op.getAdditionalNotes();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setAdditionalNotesError(true);
@@ -211,7 +211,7 @@ public class QuestionaireValidation {
         }
     }
     private void validateContactInformation(){
-        if(q.getContactInformation()!=null) {
+        if(q.getContactInformation().length()!=0) {
             String toValidate = q.getContactInformation();
             if (hasInvalideCharacters(toValidate)) {
                 errors.setContactInformationError(true);

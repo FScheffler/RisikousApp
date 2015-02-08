@@ -42,7 +42,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:id="@+id/questionnaireLayout">
+                android:id="@+id/questionnaireLayout"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
             <TextView
                     android:layout_width="match_parent"
@@ -74,6 +76,17 @@
                     android:id="@+id/spinner"
                     android:background="#ffe4e2df"/>
 
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/reportingAreaError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:textAppearance="?android:attr/textAppearanceMedium"
@@ -93,6 +106,17 @@
                     android:id="@+id/Ereigniseingabe"
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/incidentError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -145,6 +169,17 @@
                     android:layout_gravity="center" />
 
             </RadioGroup>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/occurenceRatingError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -199,6 +234,17 @@
             </RadioGroup>
 
             <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/detectionRatingError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
+            <TextView
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
@@ -251,6 +297,18 @@
 
             </RadioGroup>
 
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/significanceRatingError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TextView
                       android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -270,11 +328,33 @@
                     android:layout_marginRight="2dp"
                     android:layout_marginTop="1dp" />
 
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/dateError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TimePicker
                     android:id="@+id/timePicker1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp" />
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/timeError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -286,6 +366,7 @@
                       android:textColor="#000000"
                       android:gravity="left"/>
 
+
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -294,6 +375,17 @@
                     android:id="@+id/Orteingabe"
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/locationError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -315,6 +407,17 @@
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
 
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/immidiateMeassureError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
@@ -334,6 +437,17 @@
                     android:id="@+id/Folgeneingabe"
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/consequencesError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -355,6 +469,17 @@
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
 
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/personalFactorsError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
@@ -374,6 +499,17 @@
                     android:id="@+id/OFaktoreneingabe"
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/organisationalFactorError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
@@ -395,6 +531,17 @@
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
 
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/aditionalNotesError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
+
             <TextView android:layout_width="match_parent"
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
@@ -414,6 +561,17 @@
                     android:id="@+id/Kontakteingabe"
                     android:layout_marginTop="2pt"
                     android:gravity="left"/>
+
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.00"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/contactError"
+                    android:textColor="#FA0303"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="top|center"
+                    android:visibility="invisible"/>
 
             <Button
                     android:id="@+id/Abschicken"
