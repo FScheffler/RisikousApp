@@ -1,5 +1,6 @@
 package de.risikous.model.xml;
 
+import de.risikous.model.entitys.Comment;
 import de.risikous.model.entitys.Questionaire;
 import de.risikous.model.xml.deparser.PublicationDeparser;
 
@@ -15,5 +16,17 @@ public class Object2XML {
         result+=deparser.getOptionalFieldsAsXMLString(q);
         result+=deparser.getXMLEnd();
         return result;
+    }
+
+    public String comment2XMLString(Comment comment, String pubID){
+        String xml = "";
+        PublicationDeparser deparser= new PublicationDeparser();
+        xml += deparser.getHeaderXMLHeader();
+        xml += "<comment>";
+        xml += "<id>"+pubID+"</id>";
+        xml += "<author>"+ comment.getAuthor()+"</author>";
+        xml += "<text>"+ comment.getText()+"</text>";
+        xml += "</comment>";
+        return xml;
     }
 }

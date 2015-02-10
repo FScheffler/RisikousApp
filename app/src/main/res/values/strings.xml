@@ -8,6 +8,8 @@
     <string name="title_activity_publications">Veröffentlichungen</string>
     <string name="title_activity_publication">Detailansicht der Veröffentlichung</string>
 
+    <string name="title_activity_comments">Kommentare</string>
+
     <string name="Meldung">Meldung</string>
     <string name="Veröffentlichung">Veröffentlichungen</string>
 
@@ -31,6 +33,8 @@
     <string name="PFaktoren">Personenbezogene Faktoren</string>
     <string name="OFaktoren">Organisatorische Faktoren</string>
     <string name="Anmerkungen">Weitere Anmerkungen</string>
+    <string name="fileUpload">Dateien hochladen</string>
+    <string name="fileUploadChooseButton">Dateien auswählen</string>
     <string name="Kontaktdaten">Kontaktdaten</string>
     <string name="Abschicken">Abschicken</string>
 
@@ -42,4 +46,44 @@
     <string name="Änderung">Letzte Änderung</string>
     <string name="Titel">Titel</string>
     <string name="Status">Status</string>
+
+    <string name="detailAnsicht">Detailansicht</string>
+    <string name="incidentReport">Ereignisbeschreibung</string>
+    <string name="minRPZofReporter">Minimale Risikoprioritätszahl (Meldender)</string>
+    <string name="avgRPZofReporter">Durchschnittliche Risikoprioritätszahl (Meldender)</string>
+    <string name="maxRPZofReporter">Maximale Risikoprioritätszahl (Meldender)</string>
+    <string name="minRPZofQMB">Minimale Risikoprioritätszahl (QMB)</string>
+    <string name="avgRPZofQMB">Durchschnittliche Risikoprioritätszahl (QMB)</string>
+    <string name="maxRPZofQMB">Maximale Risikoprioritätszahl (QMB)</string>
+    <string name="differenceStatement">Abweichungen</string>
+    <string name="category">Kategorie</string>
+    <string name="action">Maßnahme</string>
+    <string name="assignedReports">zugeordnete Meldungen</string>
+
+
+
+    <string name="showComments">Kommentare ansehen</string>
+
+    <string name="daidalos_create_folder">Ordner erstellen</string>
+    <string name="daidalos_create_file">Datei erstellen</string>
+    <string name="daidalos_enter_folder_name">Ordnernamen angeben</string>
+    <string name="daidalos_enter_file_name">Dateinamen angeben</string>
+    <string name="daidalos_confirm_create_file">The file \'$file_name\' do not exists, are you sure that you want to create it?</string>
+    <string name="daidalos_confirm_select_folder">Are you sure that you want to select the folder \'$file_name\'?</string>
+    <string name="daidalos_confirm_create_folder">The folder \'$file_name\' do not exists, are you sure that you want to create it?</string>
+
+    <string name="daidalos_hello">Hello World!</string>
+    <string name="daidalos_app_name">aFileDialog</string>
+    <color name="daidalos_gray">#888</color>
+    <string name="daidalos_select">Auswählen</string>
+    <string name="daidalos_cancel">Abbrechen</string>
+    <string name="daidalos_ok">OK</string>
+    <string name="daidalos_new_file">Neu</string>
+    <string name="daidalos_accept">Akzeptieren</string>
+    <string name="daidalos_yes">Ja</string>
+    <string name="daidalos_no">Nein</string>
+    <string name="daidalos_confirm_select_file">Möchten Sie wirklich die Datei \'$file_name\' auswählen?</string>
+    <color name="daidalos_backgroud">#000</color>
+    <color name="daidalos_active_file">#fff</color>
+    <color name="daidalos_inactive_file">#888</color>
 </resources>

@@ -159,14 +159,14 @@
                         android:layout_gravity="center"/>
 
                 <RadioButton
-                    android:layout_width="90dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="0.09"
-                    android:text="@string/niedrig"
-                    android:id="@+id/radioButton3"
-                    android:textColor="#ff000000"
-                    android:clickable="true"
-                    android:layout_gravity="center" />
+                        android:layout_width="90dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.09"
+                        android:text="@string/niedrig"
+                        android:id="@+id/radioButton3"
+                        android:textColor="#ff000000"
+                        android:clickable="true"
+                        android:layout_gravity="center"/>
 
             </RadioGroup>
 
@@ -229,7 +229,7 @@
                         android:id="@+id/radioButton6"
                         android:textColor="#ff000000"
                         android:clickable="true"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"/>
 
             </RadioGroup>
 
@@ -245,15 +245,15 @@
                     android:visibility="invisible"/>
 
             <TextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="20dp"
-                      android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:text="@string/Bedeutung"
-                      android:id="@+id/Bedeutung"
-                      android:background="#ffbac6ff"
-                      android:textColor="#000000"
-                      android:gravity="left"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/Bedeutung"
+                    android:id="@+id/Bedeutung"
+                    android:background="#ffbac6ff"
+                    android:textColor="#000000"
+                    android:gravity="left"/>
 
             <RadioGroup
                     android:layout_width="fill_parent"
@@ -293,7 +293,7 @@
                         android:id="@+id/radioButton9"
                         android:textColor="#ff000000"
                         android:clickable="true"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"/>
 
             </RadioGroup>
 
@@ -310,15 +310,15 @@
                     android:visibility="invisible"/>
 
             <TextView
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_marginTop="20dp"
-                      android:textAppearance="?android:attr/textAppearanceMedium"
-                      android:text="@string/Ereigniszeit"
-                      android:id="@+id/Ereigniszeit"
-                      android:background="#ffbac6ff"
-                      android:textColor="#000000"
-                      android:gravity="left"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/Ereigniszeit"
+                    android:id="@+id/Ereigniszeit"
+                    android:background="#ffbac6ff"
+                    android:textColor="#000000"
+                    android:gravity="left"/>
 
             <DatePicker
                     android:id="@+id/datePicker1"
@@ -326,7 +326,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
-                    android:layout_marginTop="1dp" />
+                    android:layout_marginTop="1dp"/>
 
             <TextView
                     android:layout_width="match_parent"
@@ -343,7 +343,7 @@
                     android:id="@+id/timePicker1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp" />
+                    android:layout_marginTop="5dp"/>
 
             <TextView
                     android:layout_width="match_parent"
@@ -546,6 +546,27 @@
                       android:layout_height="wrap_content"
                       android:layout_marginTop="20dp"
                       android:textAppearance="?android:attr/textAppearanceMedium"
+                      android:text="@string/fileUpload"
+                      android:id="@+id/fileUploadText"
+                      android:background="#ffbac6ff"
+                      android:textColor="#000000"
+                      android:gravity="left"/>
+
+            <Button
+                    android:id="@+id/fileUpload"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fileUploadChooseButton"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"/>
+            <ListView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                    android:id="@+id/filesList"/>
+
+            <TextView android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginTop="20dp"
+                      android:textAppearance="?android:attr/textAppearanceMedium"
                       android:text="@string/Kontaktdaten"
                       android:id="@+id/Kontakt"
                       android:background="#ffbac6ff"
@@ -579,7 +600,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="@string/Abschicken"
-                    android:onClick="SendClicked" />
+                    android:onClick="SendClicked"/>
 
 
         </LinearLayout>

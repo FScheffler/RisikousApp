@@ -4,10 +4,7 @@ import de.risikous.model.entitys.Comment;
 import de.risikous.model.entitys.OverviewEntry;
 import de.risikous.model.entitys.Publication;
 import de.risikous.model.entitys.ReportingArea;
-import de.risikous.model.xml.parser.CommentParser;
-import de.risikous.model.xml.parser.OverviewEntryParser;
-import de.risikous.model.xml.parser.PublicationParser;
-import de.risikous.model.xml.parser.ReportingAreaParser;
+import de.risikous.model.xml.parser.*;
 
 import java.util.ArrayList;
 
@@ -64,20 +61,8 @@ public class XML2Object {
     public ArrayList<Comment> getCommentList(String restResult){
         CommentParser parser= new CommentParser();
         ArrayList<Comment>result = new ArrayList<Comment>();
-        if(!restResult.contains("<listOfAnswers>")) {
-            ArrayList<String> commentsAsXMLString = parser.getCommentXMLString(restResult);
-            for (int i = 0; i < commentsAsXMLString.size(); i++) {
-                Comment comment = new Comment();
-                comment.setId(parser.parseId(commentsAsXMLString.get(i)));
-                comment.setAuthor(parser.parseAuthor(commentsAsXMLString.get(i)));
-                comment.setText(parser.parseText(commentsAsXMLString.get(i)));
-                comment.setTimeStamp(parser.parseTimeStamp(commentsAsXMLString.get(i)));
-                result.add(comment);
-            }
-        }else{
-            return null;
-            //Hier Comments mit rekursiver Struktur
-        }
+        CommentRekursiv commentRekursiv = new CommentRekursiv();
+        result = commentRekursiv.readComments(restResult);
 
         return result;
     }

@@ -1,8 +1,10 @@
 package de.risikous.views;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +14,11 @@ import android.widget.RadioGroup;
 import android.widget.*;
 import de.risikous.app.R;
 import de.risikous.model.entitys.*;
+import java.io.File;
 import de.risikous.model.validation.QuestionaireValidation;
 import de.risikous.model.validation.QuestionaireValidationResult;
 import de.risikous.model.validation.QuestionaireValidationRules;
+import de.risikous.views.util.FileChooser.FileChooserDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,12 +29,14 @@ public class QuestionnaireActivity extends Activity {
 
     Spinner meldekreise;
     String currentMeldekreis;
+    ArrayList<String> filePaths=new ArrayList<String>();
+    ArrayAdapter<String> files;
+    private static final int FILE_CHOOSER = 11;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionnaire);
-
         Button meldung = (Button) findViewById(R.id.Meldung);
         meldung.setOnClickListener(new View.OnClickListener() {
 
@@ -50,6 +56,31 @@ public class QuestionnaireActivity extends Activity {
                 startActivity(pub);
             }
         });
+
+        Button fileUpload = (Button) findViewById(R.id.fileUpload);
+        final FileChooserDialog dialog = new FileChooserDialog(this);
+        fileUpload.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                dialog.loadFolder(Environment.getExternalStorageDirectory() + "/Download/");
+
+                dialog.addListener(new FileChooserDialog.OnFileSelectedListener() {
+                    public void onFileSelected(Dialog source, File file) {
+                        source.hide();
+                        filePaths.add(file.getAbsolutePath());
+                        files.notifyDataSetChanged();
+                    }
+                    public void onFileSelected(Dialog source, File folder, String name) {
+                        source.hide();
+                        filePaths.add(folder.getAbsolutePath());
+                    }
+                });
+                dialog.show();
+            }
+        });
+        ListView filesView = (ListView) findViewById(R.id.filesList);
+        this.files = new ArrayAdapter<String>(this,R.layout.daidalos_file_item, R.id.textViewLabel,filePaths);
+        filesView.setAdapter(files);
 
         meldekreise = (Spinner) findViewById(R.id.spinner);
         addMeldekreisEntriesToSpinner(meldekreise);
@@ -346,8 +377,13 @@ public class QuestionnaireActivity extends Activity {
     }
 
 
-
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if ((requestCode == FILE_CHOOSER) && (resultCode == -1)) {
+            String fileSelected = data.getStringExtra("fileSelected");
+            Toast.makeText(this, fileSelected, Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 

@@ -4,6 +4,9 @@
     android:versionCode="1"
     android:versionName="1.0">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <uses-sdk
             android:minSdkVersion="16"
             android:targetSdkVersion="21" />
@@ -50,6 +53,11 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="de.risikous.views.PublicationsActivity" />
+        </activity>
+        <activity
+                android:name="de.risikous.views.CommentsActivity"
+                android:label="@string/title_activity_comments"
+                android:screenOrientation="portrait">
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package de.risikous.model.entitys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +38,9 @@ public class Comment {
         this.timeStamp = timeStamp;
     }
     public List<Comment> getListOfAnswers() {
+        if(this.listOfAnswers == null){
+            this.listOfAnswers = new ArrayList<>();
+        }
         return listOfAnswers;
     }
     public void setListOfAnswers(List<Comment> listOfAnswers) {

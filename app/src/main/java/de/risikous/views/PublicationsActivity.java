@@ -11,11 +11,8 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.widget.*;
 import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 import de.risikous.app.R;
 import de.risikous.model.entitys.EntityManager;
 import de.risikous.model.entitys.OverviewEntry;
@@ -33,7 +30,6 @@ public class PublicationsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publications);
-
 
         Button meldung = (Button) findViewById(R.id.Meldung);
         meldung.setOnClickListener(new OnClickListener() {

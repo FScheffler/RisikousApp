@@ -1,8 +1,13 @@
 package de.risikous.model.validation;
 
+import de.risikous.model.entitys.File;
 import de.risikous.model.entitys.OpinionOfReporter;
 import de.risikous.model.entitys.PointOfTime;
 import de.risikous.model.entitys.Questionaire;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Franz on 09.01.2015.
@@ -14,12 +19,12 @@ public class QuestionaireValidation {
     char invalideCharacters[];
 
     public QuestionaireValidationResult validate(Questionaire q, QuestionaireValidationRules rules){
-            this.q=q;
-            this.r=rules;
-            invalideCharacters=r.getInvalideCharacters();
-            validateRequiredFields();
-            validateOptionalFields();
-            setHasErrors();
+        this.q=q;
+        this.r=rules;
+        invalideCharacters=r.getInvalideCharacters();
+        validateRequiredFields();
+        validateOptionalFields();
+        setHasErrors();
         return errors;
     }
     private void validateRequiredFields(){
@@ -35,7 +40,35 @@ public class QuestionaireValidation {
         validateConsequences();
         validateOpinionOfReporter();
         validateContactInformation();
+        validateFiles();
     }
+
+    private void validateFiles() {
+        if(q.getFiles() != null && !q.getFiles().isEmpty()) {
+            List<File> files = q.getFiles();
+            for (File currentFile : files) {
+                try {
+                    java.io.File file = new java.io.File(currentFile.getFileContent());
+                    if (!file.exists()) {
+                        this.errors.setFilesError(true);
+                        this.errors.setFileErrorMessage("Datei existiert nicht!");
+                    }else{
+                        double bytes = file.length();
+                        double kilo = (bytes/1024);
+                        double mega = (kilo/1024);
+                        if(mega > 5){
+                            this.errors.setFilesError(true);
+                            this.errors.setFileErrorMessage("Datei ist zu groß!");
+                        }
+                    }
+                } catch (Exception e) {
+                    this.errors.setFilesError(true);
+                    this.errors.setFileErrorMessage(e.getMessage());
+                }
+            }
+        }
+    }
+
     private void validateReportingArea() {
         if(q.getReportingArea().length()==0) {
             errors.setReportingAreaError(true);
@@ -258,6 +291,7 @@ public class QuestionaireValidation {
                 ||errors.isTimeError()||errors.isLocationError()||errors.isImmediateMeasurError()
                 ||errors.isConsequencesError()||errors.isPersonalFactorsError()||errors.isOrganisationalFactorsError()
                 ||errors.isAdditionalNotesError()||errors.isFilesError()||errors.isContactInformationError())
-                errors.setHasErrors(true);
+            errors.setHasErrors(true);
     }
+
 }

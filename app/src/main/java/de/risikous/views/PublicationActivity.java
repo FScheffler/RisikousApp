@@ -20,8 +20,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+import de.risikous.model.entitys.Publication;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -30,18 +32,24 @@ public class PublicationActivity extends Activity {
 
     private String id = "";
     private String pubTitle = "";
+    private Context activityContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publication);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Bundle extras = getIntent().getExtras();
         this.id = (String) extras.get("ID");
 
-        getInformation((TableLayout) findViewById(R.id.table1));
-        getComments((TableLayout) findViewById(R.id.table2));
+        //getInformation((TableLayout) findViewById(R.id.table1));
+        //getComments((TableLayout) findViewById(R.id.table2));
 
+        EntityManager em = new EntityManager();
+        Publication pub = em.getSpecificPublification(id);
+        List<Comment> comments = em.getCommentsForSpecificPubliction(id);
+
+        initTextViewsForSpecificPublification(pub);
 
         Button meldung = (Button) findViewById(R.id.Meldung);
         meldung.setOnClickListener(new View.OnClickListener() {
@@ -64,8 +72,66 @@ public class PublicationActivity extends Activity {
                 finish();
             }
         });
+
+        Button showComments = (Button) findViewById(R.id.showComments);
+        showComments.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(PublicationActivity.this, CommentsActivity.class);
+                intent.putExtra("ID", id);
+                PublicationActivity.this.startActivity(intent);
+            }
+        });
+        //ExpandableListView commentsList = (ExpandableListView) findViewById(R.id.commentsLists);
+        //CommentsAdapter commentsAdapter = new CommentsAdapter(this,comments);
+        //commentsList.setAdapter(commentsAdapter);
     }
 
+    private void initTextViewsForSpecificPublification(Publication pub){
+        if(pub!=null){
+
+            String title;
+            TextView titelValue  = (TextView) findViewById(R.id.titelValue);
+            titelValue.setText(pub.getTitle());
+            //.invalidate();
+            TextView incidentReportValue = (TextView) findViewById(R.id.incidentReportValue);
+            incidentReportValue.setText(pub.getIncidentReport());
+            TextView minRPZofReporterValue = (TextView) findViewById(R.id.minRPZofReporterValue);
+            minRPZofReporterValue.setText(pub.getMinRPZofReporter());
+            TextView avgRPZofReporterValue = (TextView) findViewById(R.id.avgRPZofReporterValue);
+            avgRPZofReporterValue.setText(pub.getAvgRPZofReporter());
+            TextView maxRPZofReporterValue = (TextView) findViewById(R.id.maxRPZofReporterValue);
+            maxRPZofReporterValue.setText(pub.getMaxRPZofReporter());
+            TextView minRPZofQMBValue = (TextView) findViewById(R.id.minRPZofQMBValue);
+            minRPZofQMBValue.setText(pub.getMinRPZofQMB());
+            TextView avgRPZofQMBValue = (TextView) findViewById(R.id.avgRPZofQMBValue);
+            avgRPZofQMBValue.setText(pub.getAvgRPZofQMB());
+            TextView maxRPZofQMBValue = (TextView) findViewById(R.id.maxRPZofQMBValue);
+            maxRPZofQMBValue.setText(pub.getMaxRPZofQMB());
+            if(pub.getDifferenceStatement()!=null) {
+                TextView differenceStatement = (TextView) findViewById(R.id.differenceStatement);
+                TextView differenceStatementValue = (TextView) findViewById(R.id.differenceStatementValue);
+                differenceStatementValue.setText(pub.getDifferenceStatement());
+                differenceStatement.setVisibility(View.VISIBLE);
+                differenceStatement.invalidate();
+                differenceStatementValue.setVisibility(View.VISIBLE);
+                differenceStatementValue.invalidate();
+            }else{
+                TextView differenceStatement = (TextView) findViewById(R.id.differenceStatement);
+                TextView differenceStatementValue = (TextView) findViewById(R.id.differenceStatementValue);
+                differenceStatement.setVisibility(View.INVISIBLE);
+                differenceStatement.invalidate();
+                differenceStatementValue.setVisibility(View.INVISIBLE);
+                differenceStatementValue.invalidate();
+            }
+            TextView categoryValue = (TextView) findViewById(R.id.categoryValue);
+            categoryValue.setText(pub.getCategory());
+            TextView actionValue = (TextView) findViewById(R.id.actionValue);
+            actionValue.setText(pub.getAction());
+            TextView assignedReportsValue = (TextView) findViewById(R.id.assignedReportsValue);
+            assignedReportsValue.setText(pub.getAssignedReports());
+        }
+    }
     /**
      * gets the comments of a publication
      * @param table to which the comments are added
@@ -240,7 +306,7 @@ public class PublicationActivity extends Activity {
      * sends the comment to the server
      * @param view of the calling class
      * */
-    public void sendComment(View view) {
+    public void sendComment(View view) {/**
         EditText edit1 = (EditText) findViewById(R.id.Name);
         EditText edit2 = (EditText) findViewById(R.id.Kommentar);
 
@@ -260,7 +326,7 @@ public class PublicationActivity extends Activity {
             //RestPost post = new RestPost();
             //post.execute(new String[]{"1", generator.generateComment(id, author, text)});
             //Toast.makeText(getBaseContext(), "Upload erfolgreich", Toast.LENGTH_LONG).show();
-        }
+        }*/
     }
 
     private String getId() {
@@ -273,5 +339,8 @@ public class PublicationActivity extends Activity {
 
     private void setPubTitle(String title) {
         this.pubTitle = title;
+    }
+    private Context getActivityContext() {
+        return activityContext;
     }
 }

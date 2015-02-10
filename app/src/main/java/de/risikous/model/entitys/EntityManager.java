@@ -40,31 +40,47 @@ public class EntityManager {
     }
 
     public Publication getSpecificPublification(String id){
-            HTMLReciever reciever = new HTMLReciever();
-            String restResult= reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/publication/id/" + id);
-            return xml2object.getPublication(restResult);
+        HTMLReciever reciever = new HTMLReciever();
+        String restResult= reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/publication/id/" + id);
+        Publication pub = xml2object.getPublication(restResult);
+        return pub;
     }
     public ArrayList<Comment> getCommentsForSpecificPubliction(String id){
         HTMLReciever reciever = new HTMLReciever();
         String restResult=reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/comments/id/"+id);
         return xml2object.getCommentList(restResult);
-}
+    }
     public String getCommentsForSpecificPublictionAsString(String id){
         HTMLReciever reciever = new HTMLReciever();
-            return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/comments/id/"+id);
+        return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/comments/id/"+id);
     }
     public String getSpecificPublificationAsString(String id){
         HTMLReciever reciever = new HTMLReciever();
-            return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/publication/id/"+id);
+        return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/publication/id/"+id);
     }
     public String getQuestionaireSkeletonAsString(){
         HTMLReciever reciever = new HTMLReciever();
-            return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/questionnaire");
+        return reciever.getURL("http://94.101.38.155/RisikousRESTful/rest/questionnaire");
     }
 
     public HTMLResponseCode persistQuestionaire(Questionaire q)throws IOException{
         Object2XML conv= new Object2XML();
         HTMLPoster poster= new HTMLPoster();
-        return poster.persistQuestionaire("http://94.101.38.155/RisikousRESTful/rest/questionnaire/addQuestionnaire",conv.questionaire2XMLString(q));
+        return poster.persistQuestionaire(
+                "http://94.101.38.155/RisikousRESTful/rest/questionnaire/addQuestionnaire",
+                conv.questionaire2XMLString(q));
+    }
+
+    public HTMLResponseCode persistComment(Comment comment, String pubID){
+        Object2XML conv= new Object2XML();
+        HTMLPoster poster= new HTMLPoster();
+        return poster.persistQuestionaire("http://94.101.38.155/RisikousRESTful/rest/publication/addComment",
+                conv.comment2XMLString(comment,pubID));
+    }
+    public HTMLResponseCode persistAnswer(Comment comment, String pubID){
+        Object2XML conv= new Object2XML();
+        HTMLPoster poster= new HTMLPoster();
+        return poster.persistQuestionaire("http://94.101.38.155/RisikousRESTful/rest/publication/addAnswer",
+                conv.comment2XMLString(comment,pubID));
     }
 }
